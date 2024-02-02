@@ -21,7 +21,7 @@ const WriteBlog = () => {
             tempDiv.innerHTML = content;
             console.log(tempDiv.innerText);
             setBlogContent(tempDiv.innerText)
-            
+
             let response = await axios.post('/blog/createBlog', { blogContent, imageUrl, title });
             if (response) {
                 navigate('/main')
@@ -63,14 +63,7 @@ const WriteBlog = () => {
 
             const imageUrl = await uploadFile('image', newData);
             console.log(imageUrl);
-            setImageUrl(imageUrl)
-
-            // Display image preview
-            //   const reader = new FileReader();
-            //   reader.onload = (event) => {
-            //     setImageUrl(event.target.result);
-            //   };
-            //   reader.readAsDataURL(e.target.files[0]);
+            setImageUrl(imageUrl);
         } catch (error) {
             console.error(error);
         }
@@ -104,6 +97,7 @@ const WriteBlog = () => {
                             style={{ border: '1px solid grey', marginBottom: '0' }}
                         />
                     </div>
+                    {imageUrl && <img src={imageUrl} className='w-full'/>}
 
                     <div>
                         <label className="font-medium mb-2">Blog Content</label>
