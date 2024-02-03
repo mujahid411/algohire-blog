@@ -7,12 +7,10 @@ const MainPage = () => {
 
     const [state, setState] = useState(false)
     const [allBlogs,setAllBlogs]= useState([]);
-    // const [searchQuery, setSearchQuery] = useState('');
 
     async function fetchBlogs(){
         try {
             let response = await axios.get('/blog/allBlogs');
-            // setAllBlogs(response.data)
             setAllBlogs(response.data.blogs)
         } catch (error) {
             console.error(error)
@@ -22,35 +20,14 @@ const MainPage = () => {
 fetchBlogs()
 console.log(allBlogs)
     },[])
-    // const handleSearchChange = (e) => {
-    //     let query = e.target.value
-    //     if (query.length == 0) {
-    //       setAllCourses(course)
-    //       return;
-    //     }
-    //     setSearchQuery(e.target.value);
-    
-    
-    //     const filteredCourses = allCourses.filter((ele) =>
-    //       ele.courseTitle.toLowerCase().includes(query.toLowerCase())
-    //     );
-    //     setAllCourses(filteredCourses)
-    
-    //   };
-
-    // Replace javascript:void(0) paths with your paths
+ 
     const navigation = [
         { title: `+ Write blog`, path: "/writeblog" },
         { title: "My blogs", path: "/myblog" },
-        // { title: "Support", path: "javascript:void(0)" },
     ]
 
     const submenuNav = [
-        // { title: "Overview", path: "javascript:void(0)" },
-        // { title: "Integration", path: "javascript:void(0)" },
-        // { title: "Billing", path: "javascript:void(0)" },
-        // { title: "Transactions", path: "javascript:void(0)" },
-        // { title: "Plans", path: "javascript:void(0)" },
+       
     ]
 
 
@@ -65,7 +42,7 @@ console.log(allBlogs)
                           Blog World
                     </a>
                     <div className="lg:hidden">
-                        {/* <button className="text-gray-500 hover:text-gray-800"
+                        <button className="text-gray-500 hover:text-gray-800"
                             onClick={() => setState(!state)}
                         >
                             {
@@ -80,7 +57,7 @@ console.log(allBlogs)
 
                                 )
                             }
-                        </button> */}
+                         </button>
                     </div>
                 </div>
                 <div className={`nav-menu flex-1 pb-28 mt-8 overflow-y-auto max-h-screen lg:block lg:overflow-visible lg:pb-0 lg:mt-0 ${state ? "" : "hidden"}`}>
@@ -108,7 +85,6 @@ console.log(allBlogs)
                                 )
                             })
                         }
-                        {/* <AvatarMenue /> */}
                     </ul>
                 </div>
             </div>
@@ -117,7 +93,6 @@ console.log(allBlogs)
                     {
                         submenuNav.map((item, idx) => {
                             return (
-                                // Replace [idx == 0] with [window.location.pathname == item.path]
                                 <li key={idx} className={`py-1 ${idx == 0 ? "border-b-2 border-indigo-600" : ""}`}>
                                     <a href={item.path} className="block py-2 px-3 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 duration-150">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -132,9 +107,9 @@ console.log(allBlogs)
                 </ul>
             </nav>
         </header>
-        {/* <input type="search" onChange={handleSearchChange} id="search-dropdown" className="block p-2.5 w-full h-12 z-20 text-sm text-gray-900 bg-gray-10 rounded  border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-indigo-500" placeholder="Search courses..." required /> */}
+  
           {allBlogs.length>0 && allBlogs.map((ele)=>{
-            return <Blog title={ele.title} imageUrl={ele.imageUrl} blogContent={ele.blogContent} id={ele._id}/>
+            return <Blog key={ele._id} title={ele.title} imageUrl={ele.imageUrl} blogContent={ele.blogContent} id={ele._id}/>
           })}
         </div>
     )

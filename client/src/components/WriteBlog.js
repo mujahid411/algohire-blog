@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -13,22 +13,33 @@ const WriteBlog = () => {
     const [blogContent, setBlogContent] = useState('');
     const navigate = useNavigate()
 
-    const handleSubmit = async (e) => {
-       
+    const updateBlogContent = async () => {
         try {
-            e.preventDefault();
             var tempDiv = document.createElement("div");
             tempDiv.innerHTML = content;
-            console.log(tempDiv.innerText);
-            setBlogContent(tempDiv.innerText)
-
-            let response = await axios.post('/blog/createBlog', { blogContent, imageUrl, title });
-            if (response) {
-                navigate('/main')
-            }
-
+            setBlogContent(tempDiv.innerText);
         } catch (error) {
-            console.error(error)
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        updateBlogContent();
+    }, [content]);
+
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+
+            await updateBlogContent();
+
+            if (blogContent.length > 0 && imageUrl && title) {
+                let response = await axios.post('/blog/createBlog', { blogContent, imageUrl, title });
+                if (response) {
+                    navigate('/main');
+                }
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -71,7 +82,7 @@ const WriteBlog = () => {
 
     return (
         <div className="w-full relative z-10 text-gray-600 ">
-            <center className="text-2xl font-bold mt-10">Create Blog {blogContent}</center>
+            <center className="text-2xl font-bold mt-10">Create Blog</center>
             <div className="w-full mt-0 mx-auto p-8 bg-white max-w-full md:max-w-lg sm:px-0 sm:rounded-xl ">
                 <form onSubmit={handleSubmit} className=" w-full space-y-3 mr-10 w-full">
                     <div>
@@ -102,16 +113,16 @@ const WriteBlog = () => {
                     <div>
                         <label className="font-medium mb-2">Blog Content</label>
                         <div className="mt-2">
-                            <JoditEditor ref={editor} value={content} onChange={(newContent) => setContent(newContent)} />
+                            <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />
                             <div
                                 dangerouslySetInnerHTML={{ __html: content }}
-                                onBlur={() => setBlogContent(content)}
                                 style={{ marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '5px', display: 'none' }}
                             ></div>
                         </div>
                     </div>
 
                     <button
+                    type='submit'
                         className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
                     >
                         Publish
