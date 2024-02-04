@@ -26,6 +26,13 @@ app.get('/', (req, res) => {
         console.error(error)
     }
 })
+app.get('/hello', (req, res) => {
+    try {
+        res.send('hello')
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 app.use('/api/user',userRoutes)
 app.use('/api/blog',blogRoutes)
