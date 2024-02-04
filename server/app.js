@@ -4,6 +4,7 @@ import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
 import UserModel from './models/UserModel.js';
 import jwt from 'jsonwebtoken';
+import BlogModel from './models/BlogModel.js';
 
 import cors from 'cors'
 
@@ -57,6 +58,15 @@ app.post('/api/hi', (req, res) => {
 //       message:'bad request'
 //     })
 //   })
+app.get('/allBlogs',async (req,res)=>{
+    try {
+        let blogs = await BlogModel.find({});
+        return res.status(200).json({success:'blog created successfully!',blogs})
+        
+    } catch (error) {
+        console.error(error)
+    }
+})
 app.post('/login', async (req, res) => {
     try {
         let {
