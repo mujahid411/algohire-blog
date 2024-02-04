@@ -8,7 +8,13 @@ import cors from 'cors'
 dbConnect();
 
 const app = express();
-app.use(cors())
+app.use(cors(
+    {
+        origin: ["http://localhost:3000"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+));
 
 const port = 5050;
 
