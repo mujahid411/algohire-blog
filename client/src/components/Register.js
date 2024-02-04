@@ -30,10 +30,8 @@ const Register= () => {
         navigate('/login')
       }
 
-    //    let role = response.data.role;
      } catch (error) {
         console.error(error)
-        // showToast("Something went wrong!");
 
      }
     }
