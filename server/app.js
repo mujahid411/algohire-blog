@@ -66,34 +66,7 @@ app.get('/allBlogs',async (req,res)=>{
         console.error(error)
     }
 })
-app.post('/login', async (req, res) => {
-    try {
-        let {
-            email,
-            password
-        } = req.body
-        // let findUser = await UserModel.findOne({ email });
-        res.send(email,password);
 
-        // if (!findUser) {
-        //     return res.status(404).json({ error: 'Email not found,please register' })
-        // }
-        // if (findUser) {
-        //     let payload = {
-        //         email: req.body.email,
-        //         role: findUser.role,
-        //         userDetails: findUser
-        //     }
-        //     let privatekey = 'verify@123';
-        //     let role = findUser.role;
-
-        //     let token = jwt.sign(payload, privatekey, { expiresIn: '1d' });
-        //     res.status(200).json({ success: 'User logged in successfully', token, role });
-        // }
-    } catch (error) {
-        console.error(error)
-    }
-})
 
 app.use('/api/user',userRoutes)
 app.use('/api/blog',blogRoutes)
