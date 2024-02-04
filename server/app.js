@@ -41,6 +41,14 @@ app.get('/hello', (req, res) => {
     }
 })
 
+app.post('/hi', (req, res) => {
+    try {
+        res.send('hi')
+    } catch (error) {
+        console.error(error)
+    }
+})
+
 // app.get('*',(req,res,next)=>{
 //     res.status(200).json({
 //       message:'bad request'
