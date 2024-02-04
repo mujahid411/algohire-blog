@@ -10,7 +10,7 @@ const MainPage = () => {
 
     async function fetchBlogs(){
         try {
-            let response = await axios.get('https://algohire-blog-new.vercel.app/api/blog/allBlogs');
+            let response = await axios.get('https://algohire-blog-pwongoigt-mujahid411s-projects.vercel.app/api/blog/allBlogs');
             setAllBlogs(response.data.blogs)
         } catch (error) {
             console.error(error)
