@@ -12,31 +12,31 @@ import cors from 'cors'
 dbConnect();
 const app = express();
 
-// app.use(cors(
-//         {
-//         origin: "http://localhost:3000",
-//         methods: ["POST", "GET","PUT","DELETE"],
-//         credentials: true,
-//     }
-// ));
-app.use(cors({
-    origin: function(origin, callback){
-        // Define array of allowed origins
-        const allowedOrigins = ['http://localhost:3000', 'https://algohire-blog-client.vercel.app'];
+app.use(cors(
+        {
+        origin: "https://algohire-blog-client.vercel.app",
+        methods: ["POST", "GET","PUT","DELETE"],
+        credentials: true,
+    }
+));
+// app.use(cors({
+//     origin: function(origin, callback){
+//         // Define array of allowed origins
+//         const allowedOrigins = ['http://localhost:3000', 'https://algohire-blog-client.vercel.app'];
 
-        // Allow requests with no origin 
-        // (like mobile apps or curl requests)
-        if(!origin) return callback(null, true);
-        if(allowedOrigins.indexOf(origin) === -1){
-            var msg = 'The CORS policy for this site does not ' +
-                      'allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    },
-            methods: ["POST", "GET","PUT","DELETE"],
+//         // Allow requests with no origin 
+//         // (like mobile apps or curl requests)
+//         if(!origin) return callback(null, true);
+//         if(allowedOrigins.indexOf(origin) === -1){
+//             var msg = 'The CORS policy for this site does not ' +
+//                       'allow access from the specified Origin.';
+//             return callback(new Error(msg), false);
+//         }
+//         return callback(null, true);
+//     },
+//             methods: ["POST", "GET","PUT","DELETE"],
 
-}));
+// }));
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
