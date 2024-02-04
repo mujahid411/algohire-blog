@@ -19,7 +19,7 @@ const Login= () => {
     let handleSubmit = async (e) => {
       e.preventDefault();
      try {
-       let response = await axios.post('/api/user/login',{
+       let response = await axios.post('https://algohire-blog.vercel.app/api/user/login',{
         ...userLoginData
        }) 
        let token = response.data.token

@@ -21,7 +21,7 @@ const Register= () => {
       e.preventDefault();
       console.log(user)
      try {
-       let response = await axios.post('/api/user/register',{
+       let response = await axios.post('https://algohire-blog.vercel.app/api/user/register',{
         ...user
        }) 
       if(response.status===200){
