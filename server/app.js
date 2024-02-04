@@ -2,6 +2,9 @@ import express from 'express';
 import userRoutes from './controllers/users/index.js'
 import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
+import UserModel from './models/UserModel.js';
+import jwt from 'jsonwebtoken';
+
 import cors from 'cors'
 
 
@@ -54,7 +57,7 @@ app.post('/api/hi', (req, res) => {
 //       message:'bad request'
 //     })
 //   })
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         let {
             email,
