@@ -41,7 +41,7 @@ app.get('/hello', (req, res) => {
     }
 })
 
-app.post('/hi', (req, res) => {
+app.post('/api/hi', (req, res) => {
     try {
         res.send('hi')
     } catch (error) {
