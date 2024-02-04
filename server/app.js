@@ -60,9 +60,9 @@ app.post('/api/hi', (req, res) => {
 //   })
 app.get('/allBlogs',async (req,res)=>{
     try {
-        let blogs = await BlogModel.find({});
-        return res.status(200).json({success:'blog created successfully!',blogs})
         
+        return res.status(200).json({success:'blog created successfully!'})
+        // let blogs = await BlogModel.find({});
     } catch (error) {
         console.error(error)
     }
