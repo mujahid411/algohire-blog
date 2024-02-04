@@ -24,7 +24,7 @@ const Register= () => {
        let response = await axios.post('https://algohire-blog.vercel.app/api/user/register',{
         ...user
        },{
-            withCredentials: true, // Include credentials (cookies) in the request
+            withCredentials: true, 
        })
       if(response.status===200){
         navigate('/login')
