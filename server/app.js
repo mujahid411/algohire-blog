@@ -6,10 +6,10 @@ import cors from 'cors'
 
 
 dbConnect();
-
 const app = express();
+
 // app.use(cors(
-//     {
+    //     {
 //         origin: ["http://localhost:3000/"],
 //         methods: ["POST", "GET"],
 //     }
@@ -21,11 +21,11 @@ const app = express();
 //   });
 app.use(cors({
     origin: 'http://localhost:3000' 
-  }));
+}));
+
 const port = 5050;
 
 app.use(express.json());
-
 app.get('/', (req, res) => {
     try {
         res.send('server is up and running')
@@ -40,6 +40,12 @@ app.get('/hello', (req, res) => {
         console.error(error)
     }
 })
+
+app.get('*',(req,res,next)=>{
+    res.status(200).json({
+      message:'bad request'
+    })
+  })
 
 app.use('/api/user',userRoutes)
 app.use('/api/blog',blogRoutes)
