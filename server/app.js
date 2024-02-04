@@ -2,11 +2,11 @@ import express from 'express';
 import userRoutes from './controllers/users/index.js'
 import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
-// import cors from 'cors'
+import cors from 'cors'
 
 
 dbConnect();
-// app.use(cors())
+app.use(cors())
 
 const app = express();
 
