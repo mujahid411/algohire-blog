@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom';
 // import Toast from "./Toast";
 
 const Login= () => {
+    let config = {
+        headers: {
+          "Content-Type": "application/json",
+          'Access-Control-Allow-Origin': '*',
+          }
+        }
     const navigate = useNavigate();
   
     const [userLoginData, setUserLoginData] = useState({
@@ -19,7 +25,7 @@ const Login= () => {
     let handleSubmit = async (e) => {
       e.preventDefault();
      try {
-       let response = await axios.post('https://algohire-blog.vercel.app/api/user/login',{
+       let response = await axios.post('https://algohire-blog.vercel.app/api/user/login',config,{
         ...userLoginData
        }) 
        let token = response.data.token
