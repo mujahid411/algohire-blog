@@ -22,7 +22,7 @@ const app = express();
 app.use(cors({
     origin: function(origin, callback){
         // Define array of allowed origins
-        const allowedOrigins = ['http://localhost:3000', 'http://your-production-domain.com'];
+        const allowedOrigins = ['http://localhost:3000', 'https://algohire-blog-client.vercel.app'];
 
         // Allow requests with no origin 
         // (like mobile apps or curl requests)
