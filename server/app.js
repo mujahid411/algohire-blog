@@ -2,21 +2,12 @@ import express from 'express';
 import userRoutes from './controllers/users/index.js'
 import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
-import UserModel from './models/UserModel.js';
-import jwt from 'jsonwebtoken';
-import BlogModel from './models/BlogModel.js';
-
 import cors from 'cors'
 
 
 dbConnect();
 const app = express();
-app.use((_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-  
-    next();
-  });
+
 
 app.use(cors(
         {
@@ -63,27 +54,9 @@ app.get('/', (req, res) => {
         console.error(error)
     }
 })
-app.get('/hello', (req, res) => {
-    try {
-        res.send('hello')
-    } catch (error) {
-        console.error(error)
-    }
-})
 
-app.post('/api/hi', (req, res) => {
-    try {
-        res.send('hi')
-    } catch (error) {
-        console.error(error)
-    }
-})
 
-// app.get('*',(req,res,next)=>{
-//     res.status(200).json({
-//       message:'bad request'
-//     })
-//   })
+
 app.get('/allBlogs',async (req,res)=>{
     try {
         console.log('allblogs')

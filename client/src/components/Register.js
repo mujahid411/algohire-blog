@@ -23,13 +23,14 @@ const Register= () => {
      try {
        let response = await axios.post('https://algohire-blog.vercel.app/api/user/register',{
         ...user
-       }) 
+       },{
+            withCredentials: true, // Include credentials (cookies) in the request
+       })
       if(response.status===200){
         navigate('/login')
       }
 
     //    let role = response.data.role;
- 
      } catch (error) {
         console.error(error)
         // showToast("Something went wrong!");
