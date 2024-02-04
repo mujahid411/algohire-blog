@@ -6,9 +6,9 @@ import cors from 'cors'
 
 
 dbConnect();
-app.use(cors())
 
 const app = express();
+app.use(cors())
 
 const port = 5050;
 
