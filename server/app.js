@@ -41,11 +41,11 @@ app.get('/hello', (req, res) => {
     }
 })
 
-app.get('*',(req,res,next)=>{
-    res.status(200).json({
-      message:'bad request'
-    })
-  })
+// app.get('*',(req,res,next)=>{
+//     res.status(200).json({
+//       message:'bad request'
+//     })
+//   })
 
 app.use('/api/user',userRoutes)
 app.use('/api/blog',blogRoutes)
