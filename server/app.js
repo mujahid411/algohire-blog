@@ -13,7 +13,8 @@ const app = express();
 
 app.use(cors({
     origin: 'https://algohire-blog-client.vercel.app', // Adjust this to match your frontend's origin
-    credentials: true
+    credentials: true,
+    methods: ["POST", "GET","PUT","DELETE"],
    }));
 
 // app.use((req, res, next) => {
