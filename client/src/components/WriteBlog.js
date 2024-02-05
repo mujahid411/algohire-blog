@@ -2,6 +2,8 @@ import React, { useRef, useState,useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import OpenAI from "openai";
+import dotenv from 'dotenv'
 
 const WriteBlog = () => {
     const editor = useRef(null);
@@ -87,6 +89,27 @@ const WriteBlog = () => {
         if(title.length<0){
             return;
         }
+        try {
+              const openAi = new OpenAI({
+                  apiKey:process.env.OPENAI_API,
+                });
+                const result = await openAi.chat.completions.create({
+                    model: "gpt-3.5-turbo",
+                    messages: [
+                        {
+                            role: "user",
+                            content: `write a blog on the ${title}, word count 100`,
+                        },
+                    ],
+                });
+                console.log(result.choices[0].message.content);
+                let blog = result.choices[0].message.content
+                setContent(blog)
+            
+          } catch (error) {
+                console.error(error)
+          }
+         
         // console.log(title)
  try {
     let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog',{
