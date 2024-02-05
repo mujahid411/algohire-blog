@@ -12,7 +12,7 @@ dbConnect();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust this to match your frontend's origin
+    origin: ['http://localhost:3000','https://algohire-blog-client.vercel.app'], // Adjust this to match your frontend's origin
     credentials: true
    }));
 
