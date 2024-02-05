@@ -33,7 +33,9 @@ const WriteBlog = () => {
             await updateBlogContent();
 
             if (blogContent.length > 0 && imageUrl && title) {
-                let response = await axios.post('/api/blog/createBlog', { blogContent, imageUrl, title });
+                let response = await axios.post('https://algohire-blog-server.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title }, {
+                    withCredentials: true
+                 });
                 if (response) {
                     navigate('/main');
                 }

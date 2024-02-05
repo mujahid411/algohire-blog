@@ -10,7 +10,9 @@ const MainPage = () => {
 
     async function fetchBlogs(){
         try {
-            let response = await axios.get('/api/blog/allBlogs');
+            let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/allBlogs', {
+                withCredentials: true
+             });
             setAllBlogs(response.data.blogs)
         } catch (error) {
             console.error(error)

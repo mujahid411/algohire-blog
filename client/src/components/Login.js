@@ -25,17 +25,11 @@ const Login= () => {
     let handleSubmit = async (e) => {
       e.preventDefault();
      try {
-       let response = await axios.post('/api/user/login',{
-        ...userLoginData
-       },
-       {
-        headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*',
-            }
-       },
-       {mode:'no-cors'},
-       ) 
+        let response = await axios.post('https://algohire-blog-server.vercel.app/api/user/login', {
+            ...userLoginData
+         }, {
+            withCredentials: true
+         });
        let token = response.data.token
        localStorage.setItem('token',token)
      console.log(userLoginData)

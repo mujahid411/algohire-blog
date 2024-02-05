@@ -14,8 +14,10 @@ const app = express();
 app.use(cors({
     origin: 'https://algohire-blog-client.vercel.app', // Adjust this to match your frontend's origin
     credentials: true,
-    methods: ["POST", "GET","PUT","DELETE"],
-   }));
+}));
+
+// app.options('*', cors()) // Enable preflight requests for all routes
+
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
@@ -70,18 +72,18 @@ app.get('/', (req, res) => {
 
 
 
-app.get('/allBlogs',async (req,res)=>{
+app.get('/allBlogs', async (req, res) => {
     try {
         console.log('allblogs')
-        return res.status(200).json({success:'blog created successfully!'})
+        return res.status(200).json({ success: 'blog created successfully!' })
     } catch (error) {
         console.error(error)
     }
 })
 
 
-app.use('/api/user',userRoutes)
-app.use('/api/blog',blogRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/blog', blogRoutes)
 
 app.listen(port, () => {
     console.log('Server is running at port', port);

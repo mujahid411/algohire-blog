@@ -21,9 +21,11 @@ const Register= () => {
       e.preventDefault();
       console.log(user)
      try {
-       let response = await axios.post('/api/user/register',{
+       let response = await axios.post('https://algohire-blog-server.vercel.app/api/user/register',{
         ...user
-       })
+       }, {
+        withCredentials: true
+     })
       if(response.status===200){
         navigate('/login')
       }

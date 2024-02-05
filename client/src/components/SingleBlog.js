@@ -8,11 +8,13 @@ const SingleBlog = () => {
 
   let fetchBlog = async () => {
     try {
-      let response = await axios.get('/api/blog/singleBlog', {
+      let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/singleBlog', {
         params: {
           id
         }
-      });
+      }, {
+        withCredentials: true
+     });
       setData(response.data);
     } catch (error) {
       console.error(error);

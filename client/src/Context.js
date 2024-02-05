@@ -12,21 +12,26 @@ const AppContext = ({ children }) => {
             try {
                 let token = localStorage.getItem('token')
                 console.log(token)
-                let response = await axios.get('/api/user/auth', {
+                let response = await axios.get('https://algohire-blog-server.vercel.app/api/user/auth', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                })
+                }
+                , {
+                    withCredentials: true
+                 })
                 console.log(response.data)
                 let details = response.data.payload.userDetails
                 // let payload = details.payload;
                 let userId = details._id;
                 setUserId(details._id)
-                    let userResponse = await axios.get('/api/user/getUser', {
+                    let userResponse = await axios.get('https://algohire-blog-server.vercel.app/api/user/getUser', {
                         params: {
                             id: userId
                         }
-                    })
+                    }, {
+                        withCredentials: true
+                     })
                     let userDetails = userResponse.data
                     setUser(userDetails)
                     console.log(userDetails)
