@@ -8,7 +8,7 @@ const SingleBlog = () => {
 
   let fetchBlog = async () => {
     try {
-      let response = await axios.get('https://algohire-blog.vercel.app/api/blog/singleBlog', {
+      let response = await axios.get('/api/blog/singleBlog', {
         params: {
           id
         }

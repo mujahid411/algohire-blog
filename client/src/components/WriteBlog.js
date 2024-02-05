@@ -33,7 +33,7 @@ const WriteBlog = () => {
             await updateBlogContent();
 
             if (blogContent.length > 0 && imageUrl && title) {
-                let response = await axios.post('https://algohire-blog.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title });
+                let response = await axios.post('/api/blog/createBlog', { blogContent, imageUrl, title });
                 if (response) {
                     navigate('/main');
                 }
@@ -80,6 +80,19 @@ const WriteBlog = () => {
         }
     };
 
+    const handleClick =async (e)=>{
+        e.preventDefault()
+        if(title.length<0){
+            return;
+        }
+        // console.log(title)
+        let response = await axios.get('/api/blog/ai-blog',{
+            params: { title:title }
+        });
+        let newContent = response.data.blog
+        setContent(newContent)
+    }
+
     return (
         <div className="w-full relative z-10 text-gray-600 ">
             <center className="text-2xl font-bold mt-10">Create Blog</center>
@@ -109,6 +122,12 @@ const WriteBlog = () => {
                         />
                     </div>
                     {imageUrl && <img src={imageUrl} className='w-full'/>}
+                    <button
+                    onClick={handleClick}
+                        className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
+                    >
+                        Generate AI Blog
+                    </button>
 
                     <div>
                         <label className="font-medium mb-2">Blog Content</label>

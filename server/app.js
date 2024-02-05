@@ -2,20 +2,27 @@ import express from 'express';
 import userRoutes from './controllers/users/index.js'
 import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
-import cors from 'cors'
+// import cors from 'cors';
+import dotenv from 'dotenv';
 
+
+dotenv.config();
 
 dbConnect();
 const app = express();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
-app.use(cors(
-        {
-        origin: "https://algohire-blog-client.vercel.app",
-        methods: ["POST", "GET","PUT","DELETE"],
-        credentials: true,
-    }
-));
+// app.use(cors(
+//         {
+//         origin: "https://algohire-blog-client.vercel.app",
+//         methods: ["POST", "GET","PUT","DELETE"],
+//         credentials: true,
+//     }
+// ));
 // app.use(cors({
 //     origin: function(origin, callback){
 //         // Define array of allowed origins

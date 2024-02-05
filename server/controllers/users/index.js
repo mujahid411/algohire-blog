@@ -35,12 +35,14 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
+        console.log('hello')
         let {
             email,
             password
         } = req.body
+        console.log(email)
         let findUser = await UserModel.findOne({ email });
-
+         console.log(findUser)
         if (!findUser) {
             return res.status(404).json({ error: 'Email not found,please register' })
         }
@@ -61,10 +63,44 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.post('/auth',(req,res)=>{
+router.get('/auth', (req, res) => {
     try {
-        
+        const authorizationHeader = req.headers.authorization;
+
+        if (!authorizationHeader) {
+            return res.status(401).json({ error: 'Token not provided' });
+        }
+
+        const token = authorizationHeader.split(' ')[1];
+
+        const decodedToken = jwt.verify(token, 'verify@123');
+
+        return res.status(200).json({ message: 'Authorization Successful', payload: decodedToken });
     } catch (error) {
+        console.error(error);
+
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({ error: 'Token expired, please log in again' });
+        }
+
+        return res.status(401).json({ error: 'Invalid token, please log in again' });
+    }
+});
+
+
+router.get('/getUser' , async(req,res)=>{
+    try {
+          console.log('user')
+            let id = req.query.id;
+            console.log(id)
+            let find = await UserModel.findById(id);
+            console.log(find)
+             if(find){
+               res.send(find);
+             }
+           
+    } catch (error) {
+        res.status(500).json({error:'Internal server error'})
         
     }
 })

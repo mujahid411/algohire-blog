@@ -4,7 +4,6 @@ import config from 'config'
 async function dbConnect(){
     try {
         await mongoose.connect(process.env.MONGODB_URL);
-        // await mongoose.connect(config.get('DATABASE_URL'));
         console.log('Connected to Database');
     } catch (error) {
         console.error(error)
