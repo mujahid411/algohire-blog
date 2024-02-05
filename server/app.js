@@ -2,7 +2,7 @@ import express from 'express';
 import userRoutes from './controllers/users/index.js'
 import blogRoutes from './controllers/blogs/index.js'
 import dbConnect from './dbConnect.js';
-// import cors from 'cors';
+import cors from 'cors';
 import dotenv from 'dotenv';
 
 
@@ -11,10 +11,15 @@ dotenv.config();
 dbConnect();
 const app = express();
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust this to match your frontend's origin
+    credentials: true
+   }));
+
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+//   });
 
 // app.use(cors(
 //         {
