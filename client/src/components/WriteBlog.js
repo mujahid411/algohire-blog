@@ -88,7 +88,7 @@ const WriteBlog = () => {
             return;
         }
         // console.log(title)
-        let response = await axios.get('/api/blog/ai-blog',{
+        let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog',{
             params: { title:title }
         });
         let newContent = response.data.blog
