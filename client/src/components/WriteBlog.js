@@ -88,11 +88,15 @@ const WriteBlog = () => {
             return;
         }
         // console.log(title)
-        let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog',{
-            params: { title:title }
-        });
-        let newContent = response.data.blog
-        setContent(newContent)
+ try {
+    let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog',{
+        params: { title:title }
+    });
+    let newContent = response.data.blog
+    setContent(newContent)
+ } catch (error) {
+    console.error(error)
+ }
     }
 
     return (
