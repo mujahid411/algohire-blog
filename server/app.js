@@ -11,10 +11,10 @@ dotenv.config();
 dbConnect();
 const app = express();
 
-app.use(cors({
-    origin: 'https://algohire-blog-client.vercel.app', // Adjust this to match your frontend's origin
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: 'https://algohire-blog-client.vercel.app', // Adjust this to match your frontend's origin
+//     credentials: true,
+// }));
 
 // app.options('*', cors()) // Enable preflight requests for all routes
 

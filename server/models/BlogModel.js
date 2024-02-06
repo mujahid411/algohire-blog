@@ -12,7 +12,18 @@ const blogSchema = mongoose.Schema({
     blogContent:{
        type:String,
        required:true
-    }
+    },
+    userId:{
+        type:String
+    },
+    userName:{
+        type:String
+    },
+    likes:{
+        type:Number,
+        default:0
+    },
+    comments:[]
 
 }, { timestamps: true })
 

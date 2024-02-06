@@ -11,7 +11,6 @@ const AppContext = ({ children }) => {
         async function authUser() {
             try {
                 let token = localStorage.getItem('token')
-                console.log(token)
                 let response = await axios.get('https://algohire-blog-server.vercel.app/api/user/auth', {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -20,7 +19,6 @@ const AppContext = ({ children }) => {
                 , {
                     withCredentials: true
                  })
-                console.log(response.data)
                 let details = response.data.payload.userDetails
                 // let payload = details.payload;
                 let userId = details._id;
@@ -34,7 +32,6 @@ const AppContext = ({ children }) => {
                      })
                     let userDetails = userResponse.data
                     setUser(userDetails)
-                    console.log(userDetails)
 
              
             } catch (error) {

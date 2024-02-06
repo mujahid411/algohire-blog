@@ -2,8 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../GlobalContext';
+
+
+
 
 const WriteBlog = () => {
+    const {user, userId} = useGlobalContext()
+    console.log(user)
+    const userName = user.name
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
@@ -33,7 +40,8 @@ const WriteBlog = () => {
             await updateBlogContent();
 
             if (blogContent.length > 0 && imageUrl && title) {
-                let response = await axios.post('https://algohire-blog-server.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title }, {
+                
+                let response = await axios.post('https://algohire-blog-server.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title, userId, userName  }, {
                     withCredentials: true
                 });
                 if (response) {

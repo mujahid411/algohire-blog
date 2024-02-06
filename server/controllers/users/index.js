@@ -1,14 +1,13 @@
 import express from 'express'
 import jwt from 'jsonwebtoken';
 import UserModel from '../../models/UserModel.js';
+import BlogModel from '../../models/BlogModel.js';
 const router = express.Router()
 
 
 router.post('/register', async (req, res) => {
     try {
         let { name, email, password } = req.body
-        console.log(req.body)
-
         let findUser = await UserModel.findOne({ email })
         if (findUser) {
             res.status(400).json({ error: 'email already exists please login!!' })
@@ -21,7 +20,6 @@ router.post('/register', async (req, res) => {
             role: 'user',
             // comments:[]
         }
-        console.log(userData)
         let userDetails = new UserModel(userData)
         await userDetails.save()
         res.status(200).json({ success: 'user registered successfully!' })
@@ -35,14 +33,11 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        console.log('hello')
         let {
             email,
             password
         } = req.body
-        console.log(email)
         let findUser = await UserModel.findOne({ email });
-         console.log(findUser)
         if (!findUser) {
             return res.status(404).json({ error: 'Email not found,please register' })
         }
@@ -90,11 +85,8 @@ router.get('/auth', (req, res) => {
 
 router.get('/getUser' , async(req,res)=>{
     try {
-          console.log('user')
             let id = req.query.id;
-            console.log(id)
             let find = await UserModel.findById(id);
-            console.log(find)
              if(find){
                res.send(find);
              }
@@ -104,5 +96,20 @@ router.get('/getUser' , async(req,res)=>{
         
     }
 })
+
+router.get('/myBlogs',async (req,res)=>{
+    try {
+     let id = req.query.id;
+     let find = await BlogModel.find({userId:id});
+      if(find){
+        res.send(find);
+      }
+    } catch (error) {
+     console.error(error);
+     res.status(500).json({error:'Internal server error'})
+ 
+    }
+ 
+ })
 export default router;
 

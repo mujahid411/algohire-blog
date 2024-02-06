@@ -12,7 +12,11 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    myBlogs:[{
+        type: String
+    }],
+ 
 
 }, { timestamps: true })
 

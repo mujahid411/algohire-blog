@@ -9,6 +9,7 @@ const Landing =  () => {
     return (
         <>
          <header>
+   
                 <nav className="items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
                     <div className="flex justify-between items-center w-full">
                         <a href="#" className='font-bold text-2xl'>
@@ -38,11 +39,11 @@ const Landing =  () => {
             <section className="mt-24 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8">
                 <div className="text-center space-y-4">
                     <h1 className="text-gray-800 font-bold text-4xl md:text-5xl">
-                   Your Ideas, Our Magic.
-                         <span className="text-indigo-600">  AI-Powered Blogs</span>
+                   Craft, Share, and 
+                         <span className="text-indigo-600">  Connect through Blogging.</span>
                     </h1>
                     <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
-                    Empower Your Thoughts: Transform Ideas into Captivating Blogs with AI Assistance – Your Ultimate Blogging Companion                    </p>
+                    Empower Your Thoughts: Transform Ideas into Captivating Blogs, Your Words, Your World                    </p>
                 </div>
                 <div className="mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex">
                     <a href="/register" className="px-10 py-3.5 w-full bg-indigo-600 text-white text-center rounded-md shadow-md block sm:w-auto">

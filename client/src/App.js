@@ -8,6 +8,7 @@ import CreateBlog from './components/CreateBlog';
 import SingleBlog from './components/SingleBlog';
 import Landing from './components/Landing';
 import MyBlogs from './components/MyBlogs';
+import EditBlog from './components/EditBlog';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <Route path='/main' element={<MainPage/>}/>
     <Route path='/writeblog' element={<CreateBlog/>}/>
     <Route path='/singleblog/:id' element={<SingleBlog/>}/>
+    <Route path='/editblog/:id' element={<EditBlog/>}/>
     <Route path='/myblog' element={<MyBlogs/>}/>
    </Routes>
   );
