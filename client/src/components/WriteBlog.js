@@ -1,9 +1,7 @@
-import React, { useRef, useState,useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import OpenAI from "openai";
-import dotenv from 'dotenv'
 
 const WriteBlog = () => {
     const editor = useRef(null);
@@ -37,7 +35,7 @@ const WriteBlog = () => {
             if (blogContent.length > 0 && imageUrl && title) {
                 let response = await axios.post('https://algohire-blog-server.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title }, {
                     withCredentials: true
-                 });
+                });
                 if (response) {
                     navigate('/main');
                 }
@@ -84,43 +82,23 @@ const WriteBlog = () => {
         }
     };
 
-    const handleClick =async (e)=>{
-        e.preventDefault()
-        if(title.length<0){
-            return;
-        }
-        try {
-              const openAi = new OpenAI({
-                  apiKey:process.env.OPENAI_API,
-                });
-                const result = await openAi.chat.completions.create({
-                    model: "gpt-3.5-turbo",
-                    messages: [
-                        {
-                            role: "user",
-                            content: `write a blog on the ${title}, word count 100`,
-                        },
-                    ],
-                });
-                console.log(result.choices[0].message.content);
-                let blog = result.choices[0].message.content
-                setContent(blog)
-            
-          } catch (error) {
-                console.error(error)
-          }
-         
-        // console.log(title)
- try {
-    let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog',{
-        params: { title:title }
-    });
-    let newContent = response.data.blog
-    setContent(newContent)
- } catch (error) {
-    console.error(error)
- }
-    }
+    // const handleClick = async (e) => {
+    //     e.preventDefault()
+    //     if (title.length < 0) {
+    //         return;
+    //     }
+
+    //     // console.log(title)
+    //     try {
+    //         let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/ai-blog', {
+    //             params: { title: title }
+    //         });
+    //         let newContent = response.data.blog
+    //         setContent(newContent)
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
     return (
         <div className="w-full relative z-10 text-gray-600 ">
@@ -150,13 +128,13 @@ const WriteBlog = () => {
                             style={{ border: '1px solid grey', marginBottom: '0' }}
                         />
                     </div>
-                    {imageUrl && <img src={imageUrl} className='w-full'/>}
-                    <button
+                    {imageUrl && <img src={imageUrl} className='w-full' />}
+                    {/* <button
                     onClick={handleClick}
                         className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
                     >
                         Generate AI Blog
-                    </button>
+                    </button> */}
 
                     <div>
                         <label className="font-medium mb-2">Blog Content</label>
@@ -170,7 +148,7 @@ const WriteBlog = () => {
                     </div>
 
                     <button
-                    type='submit'
+                        type='submit'
                         className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
                     >
                         Publish
