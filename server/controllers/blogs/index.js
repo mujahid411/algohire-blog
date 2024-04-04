@@ -88,9 +88,7 @@ router.put("/updateBlog/:id", async (req, res) => {
         const { id } = req.params;
 
         if (!title || !blogContent || !imageUrl) {
-            return res
-                .status(400)
-                .json({ message: "Title, blogContent, and image are required" });
+            return res.status(400).json({ message: "Title, blogContent, and image are required" });
         }
 
         const updatedBlog = await BlogModel.findByIdAndUpdate(
