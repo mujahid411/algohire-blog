@@ -1,15 +1,9 @@
 import {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-// import Toast from "./Toast";
 
 const Login= () => {
-    let config = {
-        headers: {
-          "Content-Type": "application/json",
-          'Access-Control-Allow-Origin': '*',
-          }
-        }
+
     const navigate = useNavigate();
   
     const [userLoginData, setUserLoginData] = useState({
@@ -36,11 +30,9 @@ const Login= () => {
      if(response.status===200){
         navigate('/main')
        }
-    //    let role = response.data.role;
  
      } catch (error) {
         console.error(error)
-        // showToast("Something went wrong!");
 
      }
     }
