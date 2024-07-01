@@ -9,6 +9,7 @@ const AppContext = ({ children }) => {
 
     useEffect(() => {
         async function authUser() {
+            console.log("authUser")
             try {
                 let token = localStorage.getItem('token')
                 let response = await axios.get('https://algohire-blog-server.vercel.app/api/user/auth', {
@@ -16,24 +17,24 @@ const AppContext = ({ children }) => {
                         Authorization: `Bearer ${token}`
                     }
                 }
-                , {
-                    withCredentials: true
-                 })
+                    , {
+                        withCredentials: true
+                    })
                 let details = response.data.payload.userDetails
                 // let payload = details.payload;
                 let userId = details._id;
                 setUserId(details._id)
-                    let userResponse = await axios.get('https://algohire-blog-server.vercel.app/api/user/getUser', {
-                        params: {
-                            id: userId
-                        }
-                    }, {
-                        withCredentials: true
-                     })
-                    let userDetails = userResponse.data
-                    setUser(userDetails)
+                let userResponse = await axios.get('https://algohire-blog-server.vercel.app/api/user/getUser', {
+                    params: {
+                        id: userId
+                    }
+                }, {
+                    withCredentials: true
+                })
+                let userDetails = userResponse.data
+                setUser(userDetails)
 
-             
+
             } catch (error) {
                 console.error(error)
             }
