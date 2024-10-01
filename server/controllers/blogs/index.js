@@ -54,33 +54,33 @@ router.get('/singleBlog', async (req, res) => {
     }
 
 })
-const openAi = new OpenAI({
-    apiKey: process.env.OPENAI_API,
-});
+// const openAi = new OpenAI({
+//     apiKey: process.env.OPENAI_API,
+// });
 
 
-router.get("/ai-blog", async (req, res) => {
-    try {
-        const title = req.query.title
-        console.log(title)
-        const result = await openAi.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "user",
-                    blogContent: `write a blog on the ${title}, word count 100`,
-                },
-            ],
-        });
-        console.log(result.choices[0].message.blogContent);
-        let blog = result.choices[0].message.blogContent
+// router.get("/ai-blog", async (req, res) => {
+//     try {
+//         const title = req.query.title
+//         console.log(title)
+//         const result = await openAi.chat.completions.create({
+//             model: "gpt-3.5-turbo",
+//             messages: [
+//                 {
+//                     role: "user",
+//                     blogContent: `write a blog on the ${title}, word count 100`,
+//                 },
+//             ],
+//         });
+//         console.log(result.choices[0].message.blogContent);
+//         let blog = result.choices[0].message.blogContent
 
-        return res.status(200).json({ success: 'ai blog generated successfully!', blog })
+//         return res.status(200).json({ success: 'ai blog generated successfully!', blog })
 
-    } catch (error) {
-        console.error(error);
-    }
-});
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
 router.put("/updateBlog/:id", async (req, res) => {
     try {
