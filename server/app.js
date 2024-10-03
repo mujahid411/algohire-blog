@@ -12,7 +12,8 @@ dbConnect();
 const app = express();
 
 app.use(cors({
-    origin: 'https://algohire-blog-client.vercel.app', 
+    // origin: 'https://algohire-blog-client.vercel.app', 
+    origin: 'http://localhost:3000',
     credentials: true,
 }));
 
