@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
 import { FaArrowLeft } from 'react-icons/fa';
+import NavBar from './NavBar';
 
 const EditBlog = () => {
-    const { user, userId,navigate } = useGlobalContext()
+    const { user, userId, navigate } = useGlobalContext()
     const { id } = useParams()
     const userName = user.name
     const editor = useRef(null);
@@ -133,17 +134,17 @@ const EditBlog = () => {
     //         console.error(error)
     //     }
     // }
-
     return (
-        <div>
+        <div className='bg-white h-screen'>
+            <NavBar />
             <button
-                className="absolute top-3 left-3 p-3 rounded-full bg-gray-200 hover:bg-gray-300 z-50"
+                className="absolute top-3 left-3 p-3 rounded-full bg-black text-white hover:bg-gray-300 z-50"
                 onClick={() => navigate('/main')}
             >
                 <FaArrowLeft />
             </button>
             <div className="w-full relative z-10 text-gray-600 ">
-                <center className="text-2xl font-bold mt-10">Edit Blog</center>
+                <center className="text-2xl font-bold ">Edit Blog</center>
                 <div className="w-full mt-0 mx-auto p-8 bg-white max-w-full md:max-w-lg sm:px-0 sm:rounded-xl ">
                     <form onSubmit={handleSubmit} className=" w-full space-y-3 mr-10 w-full">
                         <div>

@@ -3,12 +3,13 @@ import JoditEditor from 'jodit-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
+import { FaArrowLeft } from 'react-icons/fa';
 
 
 
 
 const WriteBlog = () => {
-    const {user, userId} = useGlobalContext()
+    const { user, userId, base_url } = useGlobalContext()
     console.log(user)
     const userName = user.name
     const editor = useRef(null);
@@ -40,8 +41,8 @@ const WriteBlog = () => {
             await updateBlogContent();
 
             if (blogContent.length > 0 && imageUrl && title) {
-                
-                let response = await axios.post('https://algohire-blog-server.vercel.app/api/blog/createBlog', { blogContent, imageUrl, title, userId, userName  }, {
+
+                let response = await axios.post(`${base_url}/api/blog/createBlog`, { blogContent, imageUrl, title, userId, userName }, {
                     withCredentials: true
                 });
                 if (response) {
@@ -109,59 +110,67 @@ const WriteBlog = () => {
     // }
 
     return (
-        <div className="w-full relative z-10 text-gray-600 ">
-            <center className="text-2xl font-bold mt-10">Create Blog</center>
-            <div className="w-full mt-0 mx-auto p-8 bg-white max-w-full md:max-w-lg sm:px-0 sm:rounded-xl ">
-                <form onSubmit={handleSubmit} className=" w-full space-y-3 mr-10 w-full">
-                    <div>
-                        <label className="font-medium">Title</label>
-                        <input
-                            type="text"
-                            required
-                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </div>
+        <div className='w-full h-screen bg-white'>
+            <button
+                className="absolute top-3 left-3 p-3 rounded-full text-white bg-gray-700 hover:bg-gray-500 z-50"
+                onClick={() => navigate('/main')}
+            >
+                <FaArrowLeft />
+            </button>
+            <div className="w-full relative z-10 text-gray-600 bg-white">
+                <center className="text-2xl font-bold  ">Create Blog</center>
+                <div className="w-full mt-0 mx-auto p-8 bg-white max-w-full md:max-w-lg sm:px-0 sm:rounded-xl ">
+                    <form onSubmit={handleSubmit} className=" w-full space-y-3 mr-10 w-full">
+                        <div>
+                            <label className="font-medium">Title</label>
+                            <input
+                                type="text"
+                                required
+                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </div>
 
-                    <div>
-                        <label className="font-medium">Image</label>
-                        <input
-                            id="courseImage"
-                            name="courseImage"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageUpload}
-                            className="file-input w-full h-11 rounded border-1 text-gray-900 placeholder:text-gray-400 focus:ring-1 focus:ring-black-600 text-sm mt-2 file:bg-black-600"
-                            style={{ border: '1px solid grey', marginBottom: '0' }}
-                        />
-                    </div>
-                    {imageUrl && <img src={imageUrl} className='w-full' />}
-                    {/* <button
+                        <div>
+                            <label className="font-medium">Image</label>
+                            <input
+                                id="courseImage"
+                                name="courseImage"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                className="file-input w-full h-11 rounded border-1 text-gray-900 placeholder:text-gray-400 focus:ring-1 focus:ring-black-600 text-sm mt-2 file:bg-black-600"
+                                style={{ border: '1px solid grey', marginBottom: '0' }}
+                            />
+                        </div>
+                        {imageUrl && <img src={imageUrl} className='w-full' />}
+                        {/* <button
                     onClick={handleClick}
                         className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
                     >
                         Generate AI Blog
                     </button> */}
 
-                    <div>
-                        <label className="font-medium mb-2">Blog Content</label>
-                        <div className="mt-2">
-                            <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />
-                            <div
-                                dangerouslySetInnerHTML={{ __html: content }}
-                                style={{ marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '5px', display: 'none' }}
-                            ></div>
+                        <div>
+                            <label className="font-medium mb-2">Blog Content</label>
+                            <div className="mt-2">
+                                <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: content }}
+                                    style={{ marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '5px', display: 'none' }}
+                                ></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <button
-                        type='submit'
-                        className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
-                    >
-                        Publish
-                    </button>
-                </form>
+                        <button
+                            type='submit'
+                            className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
+                        >
+                            Publish
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

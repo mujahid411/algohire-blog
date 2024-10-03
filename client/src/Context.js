@@ -5,6 +5,8 @@ import GlobalContext from "./GlobalContext";
 const AppContext = ({ children }) => {
     const [user, setUser] = useState({});
     const [userId, setUserId] = useState('');
+    // const base_url = "https://algohire-blog-server.vercel.app"
+    const base_url = 'http://localhost:5050'
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -12,7 +14,7 @@ const AppContext = ({ children }) => {
             console.log("authUser")
             try {
                 let token = localStorage.getItem('token')
-                let response = await axios.get('https://algohire-blog-server.vercel.app/api/user/auth', {
+                let response = await axios.get(`${base_url}/api/user/auth`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -24,7 +26,7 @@ const AppContext = ({ children }) => {
                 // let payload = details.payload;
                 let userId = details._id;
                 setUserId(details._id)
-                let userResponse = await axios.get('https://algohire-blog-server.vercel.app/api/user/getUser', {
+                let userResponse = await axios.get(`${base_url}/api/user/getUser`, {
                     params: {
                         id: userId
                     }
@@ -43,7 +45,7 @@ const AppContext = ({ children }) => {
     }, [navigate])
 
     return (
-        <GlobalContext.Provider value={{ user, setUser, userId, navigate }}>
+        <GlobalContext.Provider value={{ user, setUser, userId, navigate, base_url }}>
             {children}
         </GlobalContext.Provider>
     )

@@ -4,19 +4,19 @@ import axios from 'axios'
 import { FaArrowLeft } from 'react-icons/fa';
 
 const MyBlogs = () => {
-    let { userId,navigate } = useGlobalContext();
+    let { userId, navigate, base_url } = useGlobalContext();
     let id = userId
     const [blogs, setBlogs] = useState([])
 
     const getMyBlogs = async () => {
         try {
-            let response = await axios.get('https://algohire-blog-server.vercel.app/api/user/myBlogs', {
+            let response = await axios.get(`${base_url}/api/user/myBlogs`, {
                 params: {
                     id
                 }
-            } , {
+            }, {
                 withCredentials: true
-             })
+            })
             let allBlogs = response.data;
             console.log(allBlogs)
             setBlogs(allBlogs)
@@ -33,37 +33,37 @@ const MyBlogs = () => {
 
     const handleDelete = async (blogId) => {
         try {
-            await axios.delete(`https://algohire-blog-server.vercel.app/api/blog/deleteBlog/${blogId}` , {
+            await axios.delete(`${base_url}/api/blog/deleteBlog/${blogId}`, {
                 withCredentials: true
-             });
+            });
             // After successful deletion, fetch updated list of blogs
             getMyBlogs();
         } catch (error) {
             console.error(error);
         }
     }
-    if(blogs.length===0){
+    if (blogs.length === 0) {
         return (
-            <div>
+            <div className='bg-white h-screen text-black'>
                 <button
-                className="absolute top-3 left-3 p-3 rounded-full bg-gray-200 hover:bg-gray-300 z-50"
-                onClick={() => navigate('/main')}
-            >
-                <FaArrowLeft />
-            </button>
-            <div className="w-full flex justify-center">
-            <h1 className='text-4xl font-bold mt-20'>No Blogs Yet...</h1>
-        </div>
+                    className="absolute top-3 left-3 p-3 rounded-full bg-black text-white hover:bg-gray-300 z-50"
+                    onClick={() => navigate('/main')}
+                >
+                    <FaArrowLeft />
+                </button>
+                <div className="w-full flex justify-center">
+                    <h1 className='text-4xl font-bold mt-20'>No Blogs Yet...</h1>
+                </div>
             </div>
-        
+
         )
-            
+
     }
 
     return (
-        <div>
+        <div className='bg-white h-screen'>
             <button
-                className="absolute top-3 left-3 p-3 rounded-full bg-gray-200 hover:bg-gray-300 z-50"
+                className="absolute top-3 left-3 p-3 rounded-full bg-black text-white hover:bg-gray-300 z-50"
                 onClick={() => navigate('/main')}
             >
                 <FaArrowLeft />

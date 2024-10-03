@@ -1,40 +1,42 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../GlobalContext';
 
-const Login= () => {
+const Login = () => {
 
     const navigate = useNavigate();
-  
+    const { base_url } = useGlobalContext()
+
     const [userLoginData, setUserLoginData] = useState({
-      email: '',
-      password:''
+        email: '',
+        password: ''
     });
     let handleChange = (e) => {
-      setUserLoginData({ ...userLoginData, [e.target.name]: e.target.value })
+        setUserLoginData({ ...userLoginData, [e.target.name]: e.target.value })
     }
 
 
-  
-    let handleSubmit = async (e) => {
-      e.preventDefault();
-     try {
-        let response = await axios.post('https://algohire-blog-server.vercel.app/api/user/login', {
-            ...userLoginData
-         }, {
-            withCredentials: true
-         });
-       let token = response.data.token
-       localStorage.setItem('token',token)
-     console.log(userLoginData)
-     if(response.status===200){
-        navigate('/main')
-       }
- 
-     } catch (error) {
-        console.error(error)
 
-     }
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let response = await axios.post(`${base_url}/api/user/login`, {
+                ...userLoginData
+            }, {
+                withCredentials: true
+            });
+            let token = response.data.token
+            localStorage.setItem('token', token)
+            console.log(userLoginData)
+            if (response.status === 200) {
+                navigate('/main')
+            }
+
+        } catch (error) {
+            console.error(error)
+
+        }
     }
 
 
@@ -49,7 +51,7 @@ const Login= () => {
                     </div>
                 </div>
                 <div className="bg-white shadow p-4 py-6 space-y-8 sm:p-6 sm:rounded-lg">
-                    
+
                     <form
                         onSubmit={handleSubmit}
                         className="space-y-5"
