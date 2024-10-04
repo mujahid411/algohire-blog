@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
 import { FaArrowLeft } from 'react-icons/fa';
-import NavBar from './NavBar';
 
 const EditBlog = () => {
     const { user, userId, navigate } = useGlobalContext()
@@ -136,7 +135,7 @@ const EditBlog = () => {
     // }
     return (
         <div className='bg-white h-screen'>
-            <NavBar />
+            {/* <NavBar /> */}
             <button
                 className="absolute top-3 left-3 p-3 rounded-full bg-black text-white hover:bg-gray-300 z-50"
                 onClick={() => navigate('/main')}
