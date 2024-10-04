@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useGlobalContext } from '../GlobalContext';
 
 const NavBar = () => {
-    const [state, setState] = useState()
-    const navigation = [
-        { title: `Write blog`, path: "/writeblog" },
-        { title: "My blogs", path: "/myblog" },
-        { title: "Logout", path: "/" },
-    ]
+    const [state, setState] = useState();
+    const { authUser } = useGlobalContext()
+    const [navigation, setNavigation] = useState([]);
+    useEffect(() => {
+        console.log(authUser, "authuserrr")
+        if (!authUser) {
+            setNavigation([{ title: "Log In", path: "/login" }])
+        } else {
+            setNavigation([
+                { title: `Write blog`, path: "/writeblog" },
+                { title: "My blogs", path: "/myblog" },
+                { title: "Logout", path: "/" }])
+
+        }
+    }, [authUser])
+
+
     const submenuNav = []
     return (
         <div>
