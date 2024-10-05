@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
 import { FaArrowLeft } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const EditBlog = () => {
-    const { user, userId, navigate } = useGlobalContext()
+    const { user, userId, navigate, base_url } = useGlobalContext()
     const { id } = useParams()
     const userName = user.name
     const editor = useRef(null);
@@ -21,7 +22,7 @@ const EditBlog = () => {
 
     let fetchBlog = async () => {
         try {
-            let response = await axios.get('https://algohire-blog-server.vercel.app/api/blog/singleBlog', {
+            let response = await axios.get(`${base_url}/api/blog/singleBlog`, {
                 params: {
                     id
                 }
@@ -29,6 +30,7 @@ const EditBlog = () => {
                 withCredentials: true
             });
             let blogData = response.data
+            console.log("blog data", blogData)
             setData(blogData);
             setContent(blogData.blogContent);
             setTitle(blogData.title);
@@ -67,15 +69,17 @@ const EditBlog = () => {
 
             if (blogContent.length > 0 && imageUrl && title) {
                 // https://algohire-blog-server.vercel.app
-                let response = await axios.put(`https://algohire-blog-server.vercel.app/api/blog/updateBlog/${data._id}`, { blogContent, imageUrl, title, userId, userName }, {
+                let response = await axios.put(`${base_url}/api/blog/updateBlog/${data._id}`, { blogContent, imageUrl, title, userId, userName }, {
                     withCredentials: true
                 });
                 if (response) {
+                    toast.success("Blog Updated Successfully!")
                     navigate('/main');
                 }
             }
         } catch (error) {
             console.error(error);
+            toast.error("Update failed, please try again")
         }
     };
 
@@ -179,7 +183,7 @@ const EditBlog = () => {
 
                         <div>
                             <label className="font-medium mb-2">Blog Content</label>
-                            <div className="mt-2">
+                            <div className="mt-2 h-400px">
                                 <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />
                                 <div
                                     dangerouslySetInnerHTML={{ __html: content }}

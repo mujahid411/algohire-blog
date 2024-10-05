@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
 import { FaArrowLeft } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 
 
@@ -46,11 +47,13 @@ const WriteBlog = () => {
                     withCredentials: true
                 });
                 if (response) {
+                    toast.success("Blog Published!")
                     navigate('/main');
                 }
             }
         } catch (error) {
             console.error(error);
+            toast.error("Blog was not created, Please try again")
         }
     };
 

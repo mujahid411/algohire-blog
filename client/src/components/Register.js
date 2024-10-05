@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../GlobalContext';
+import { toast } from 'react-hot-toast'
 // import Toast from "./Toast";
 
 const Register = () => {
@@ -29,12 +30,13 @@ const Register = () => {
                 withCredentials: true
             })
             if (response.status === 200) {
-                navigate('/login')
+                toast.success('Regiserted Successfully')
+                navigate('/main')
             }
 
         } catch (error) {
             console.error(error)
-
+            toast.error('Registration failed:', error)
         }
     }
 

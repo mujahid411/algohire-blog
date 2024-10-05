@@ -9,21 +9,25 @@ import SingleBlog from './components/SingleBlog';
 import Landing from './components/Landing';
 import MyBlogs from './components/MyBlogs';
 import EditBlog from './components/EditBlog';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
   return (
-    <Routes>
-      <Route path='/' element={<Landing />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/main' element={<MainPage />} />
-      <Route path='/writeblog' element={<CreateBlog />} />
-      <Route path='/singleblog/:id' element={<SingleBlog />} />
-      <Route path='/editblog/:id' element={<EditBlog />} />
-      <Route path='/myblog' element={<MyBlogs />} />
-    </Routes>
+    <div className='bg-white'>
+      <Routes>
+        <Route path='/' element={<Landing />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/main' element={<MainPage />} />
+        <Route path='/writeblog' element={<CreateBlog />} />
+        <Route path='/singleblog/:id' element={<SingleBlog />} />
+        <Route path='/editblog/:id' element={<EditBlog />} />
+        <Route path='/myblog' element={<MyBlogs />} />
+      </Routes>
+      <Toaster />
+    </div>
   );
 }
 

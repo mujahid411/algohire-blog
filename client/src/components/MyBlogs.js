@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../GlobalContext'
 import axios from 'axios'
 import { FaArrowLeft } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const MyBlogs = () => {
     let { userId, navigate, base_url } = useGlobalContext();
@@ -36,10 +37,11 @@ const MyBlogs = () => {
             await axios.delete(`${base_url}/api/blog/deleteBlog/${blogId}`, {
                 withCredentials: true
             });
-            // After successful deletion, fetch updated list of blogs
+            toast.success("Blog Deleted")
             getMyBlogs();
         } catch (error) {
             console.error(error);
+            toast.error("Blog delete failed")
         }
     }
     if (blogs.length === 0) {
